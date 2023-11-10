@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Text;
 using System.IO.Ports;
 using System.Linq;
 using System.Management;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace R_Wasd_Desktop_GUI
 {
@@ -51,10 +47,14 @@ namespace R_Wasd_Desktop_GUI
             { "0xE6", "Num 6" }, { "0xE7", "Num 7" }, { "0xE8", "Num 8" },
             { "0xE9", "Num 9" }, { "0xEA", "Num 0" }, { "0xEB", "Num ." }
         };
-        
+
         Thread threadArduinoDetect, threadWatchArduinoPort;
 
         bool hasUnsavedData = false;
+
+        ComboBox highLightedComboBox = null;
+
+        List<PrivateFontCollection> _fontCollections;
 
         public Form1()
         {
@@ -67,8 +67,10 @@ namespace R_Wasd_Desktop_GUI
 
         private void WatchArduinoPort()
         {
-            while (true) {
-                if (!serialPort1.IsOpen && (threadArduinoDetect == null || !threadArduinoDetect.IsAlive)) {
+            while (true)
+            {
+                if (!serialPort1.IsOpen && (threadArduinoDetect == null || !threadArduinoDetect.IsAlive))
+                {
                     arduinoDeviceID = null;
                     threadArduinoDetect = new Thread(AutodetectArduinoPort);
                     threadArduinoDetect.Start();
@@ -136,7 +138,6 @@ namespace R_Wasd_Desktop_GUI
                 comboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
                 comboBox.KeyPress += new KeyPressEventHandler(ComboBox_KeyPress);
                 ListAllCharacters(comboBox);
-                comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             }
         }
 
@@ -156,34 +157,20 @@ namespace R_Wasd_Desktop_GUI
 
         private void ComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*System.Windows.Forms.ComboBox currentComboBox = (System.Windows.Forms.ComboBox)sender;
-            string keyCode = "0x" + ((int)e.KeyChar).ToString("X2");
             
-            if (usbKeyCodes.ContainsKey(keyCode))
-            {
-                setComboboxByKey(currentComboBox, keyCode);
-                string selectedValue = usbKeyCodes[keyCode];
-                currentComboBox.SelectedItem = selectedValue;
-                ComboBox_SelectedIndexChanged(currentComboBox, EventArgs.Empty); // Select change esemény meghívása
-            }*/
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setButtonsEnadbled(false, true, true, true);
-            hasUnsavedData = true;
-
-            /*System.Windows.Forms.ComboBox comboBox = (System.Windows.Forms.ComboBox)sender;
-            KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)comboBox.SelectedItem;
-            string selectedValue = selectedPair.Value;
-            MessageBox.Show($"Selected value: {selectedValue}");*/
+            
         }
 
         private void setComboBoxesEnabled(bool invokeRequired, bool isEnabled)
         {
             foreach (var comboBox in comboBoxes)
             {
-                if (invokeRequired) {
+                if (invokeRequired)
+                {
                     comboBox.Invoke(new Action(() => comboBox.Enabled = isEnabled));
                     continue;
                 }
@@ -224,7 +211,7 @@ namespace R_Wasd_Desktop_GUI
         private void buttonGetSettings_Click(object sender, EventArgs e)
         {
             bool allowedOperation = true;
-            
+
             if (hasUnsavedData)
             {
                 // Confirm ablak meghívása
@@ -235,7 +222,8 @@ namespace R_Wasd_Desktop_GUI
                 }
             }
 
-            if (allowedOperation) {
+            if (allowedOperation)
+            {
                 setToolText("Download data from device...");
                 setButtonsEnadbled(false, false, false, false);
                 setComboBoxesEnabled(false, false);
@@ -353,6 +341,79 @@ namespace R_Wasd_Desktop_GUI
         private DialogResult getConfirmDialog(string message = "There are unsaved changes. Are you sure you want to continue?", string title = "Confirm")
         {
             return MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+        }
+
+        private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            setButtonsEnadbled(false, true, true, true);
+            hasUnsavedData = true;
+
+            ComboBox currentComboBox = (ComboBox)sender;
+
+            highLightedComboBox = null;
+
+
+            foreach (ComboBox comboBox in comboBoxes)
+            {
+                if (comboBox.Equals(currentComboBox)) {
+                    continue;
+                }
+
+                if (currentComboBox.SelectedIndex == comboBox.SelectedIndex) {
+                    highLightedComboBox = comboBox;
+                    currentComboBox.SelectedItem = null;
+                    break;
+                }
+            }
+
+            if (highLightedComboBox != null) {
+                Thread thread = new Thread(HighlightComboBox);
+                thread.Start();
+            }
+        }
+
+        private void HighlightComboBox()
+        {
+            ComboBox comboBox = highLightedComboBox;
+            bool highlight = true;
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (comboBox.InvokeRequired)
+                {
+                    if (highlight)
+                    {
+                        comboBox.Invoke(new Action(() => comboBox.BackColor = Color.OrangeRed));
+                        comboBox.Invoke(new Action(() => comboBox.ForeColor = Color.White));
+                    }
+                    else
+                    {
+                        comboBox.Invoke(new Action(() => comboBox.BackColor = Color.White));
+                        comboBox.Invoke(new Action(() => comboBox.ForeColor = Color.Black));
+                    }
+                }
+                else
+                {
+                    if (highlight)
+                    {
+                        comboBox.BackColor = Color.OrangeRed;
+                        comboBox.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        comboBox.BackColor = Color.White;
+                        comboBox.ForeColor = Color.Black;
+                    }
+                }
+
+                Thread.Sleep(300);
+
+                highlight = !highlight;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

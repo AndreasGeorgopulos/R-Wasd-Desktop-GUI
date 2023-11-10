@@ -312,8 +312,6 @@ namespace R_Wasd_Desktop_GUI
 
         private void processSerialPortDate(string inData)
         {
-            textBox1.Text += inData;
-
             if (inData.Contains("#TAKE"))
             {
                 List<string> list = inData.Substring(inData.IndexOf(" ") + 1).Split('|').ToList();

@@ -60,7 +60,6 @@
             this.buttonSetDefault = new System.Windows.Forms.Button();
             this.buttonGetSettings = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -86,22 +85,26 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 562);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 455);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1012, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1220, 22);
             this.statusStrip1.TabIndex = 20;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // comboBox20
             // 
+            this.comboBox20.BackColor = System.Drawing.Color.White;
+            this.comboBox20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox20.Enabled = false;
             this.comboBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox20.ForeColor = System.Drawing.Color.Black;
             this.comboBox20.FormattingEnabled = true;
             this.comboBox20.Location = new System.Drawing.Point(154, 74);
             this.comboBox20.Name = "comboBox20";
@@ -110,8 +113,11 @@
             // 
             // comboBox19
             // 
+            this.comboBox19.BackColor = System.Drawing.Color.White;
+            this.comboBox19.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox19.Enabled = false;
             this.comboBox19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox19.ForeColor = System.Drawing.Color.Black;
             this.comboBox19.FormattingEnabled = true;
             this.comboBox19.Location = new System.Drawing.Point(91, 115);
             this.comboBox19.Name = "comboBox19";
@@ -120,8 +126,11 @@
             // 
             // comboBox18
             // 
+            this.comboBox18.BackColor = System.Drawing.Color.White;
+            this.comboBox18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox18.Enabled = false;
             this.comboBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox18.ForeColor = System.Drawing.Color.Black;
             this.comboBox18.FormattingEnabled = true;
             this.comboBox18.Location = new System.Drawing.Point(30, 74);
             this.comboBox18.Name = "comboBox18";
@@ -130,8 +139,11 @@
             // 
             // comboBox17
             // 
+            this.comboBox17.BackColor = System.Drawing.Color.White;
+            this.comboBox17.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox17.Enabled = false;
             this.comboBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox17.ForeColor = System.Drawing.Color.Black;
             this.comboBox17.FormattingEnabled = true;
             this.comboBox17.Location = new System.Drawing.Point(91, 30);
             this.comboBox17.Name = "comboBox17";
@@ -140,8 +152,11 @@
             // 
             // comboBox16
             // 
+            this.comboBox16.BackColor = System.Drawing.Color.White;
+            this.comboBox16.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox16.Enabled = false;
             this.comboBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox16.ForeColor = System.Drawing.Color.Black;
             this.comboBox16.FormattingEnabled = true;
             this.comboBox16.Location = new System.Drawing.Point(225, 72);
             this.comboBox16.Name = "comboBox16";
@@ -150,8 +165,11 @@
             // 
             // comboBox15
             // 
+            this.comboBox15.BackColor = System.Drawing.Color.White;
+            this.comboBox15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox15.Enabled = false;
             this.comboBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox15.ForeColor = System.Drawing.Color.Black;
             this.comboBox15.FormattingEnabled = true;
             this.comboBox15.Location = new System.Drawing.Point(304, 74);
             this.comboBox15.Name = "comboBox15";
@@ -160,8 +178,11 @@
             // 
             // comboBox14
             // 
+            this.comboBox14.BackColor = System.Drawing.Color.White;
+            this.comboBox14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox14.Enabled = false;
             this.comboBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox14.ForeColor = System.Drawing.Color.Black;
             this.comboBox14.FormattingEnabled = true;
             this.comboBox14.Location = new System.Drawing.Point(32, 72);
             this.comboBox14.Name = "comboBox14";
@@ -170,8 +191,11 @@
             // 
             // comboBox13
             // 
+            this.comboBox13.BackColor = System.Drawing.Color.White;
+            this.comboBox13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox13.Enabled = false;
             this.comboBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox13.ForeColor = System.Drawing.Color.Black;
             this.comboBox13.FormattingEnabled = true;
             this.comboBox13.Location = new System.Drawing.Point(225, 30);
             this.comboBox13.Name = "comboBox13";
@@ -180,8 +204,11 @@
             // 
             // comboBox12
             // 
+            this.comboBox12.BackColor = System.Drawing.Color.White;
+            this.comboBox12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox12.Enabled = false;
             this.comboBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox12.ForeColor = System.Drawing.Color.Black;
             this.comboBox12.FormattingEnabled = true;
             this.comboBox12.Location = new System.Drawing.Point(32, 30);
             this.comboBox12.Name = "comboBox12";
@@ -190,8 +217,11 @@
             // 
             // comboBox11
             // 
+            this.comboBox11.BackColor = System.Drawing.Color.White;
+            this.comboBox11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox11.Enabled = false;
             this.comboBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox11.ForeColor = System.Drawing.Color.Black;
             this.comboBox11.FormattingEnabled = true;
             this.comboBox11.Location = new System.Drawing.Point(32, 116);
             this.comboBox11.Name = "comboBox11";
@@ -200,8 +230,11 @@
             // 
             // comboBox10
             // 
+            this.comboBox10.BackColor = System.Drawing.Color.White;
+            this.comboBox10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox10.Enabled = false;
             this.comboBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox10.ForeColor = System.Drawing.Color.Black;
             this.comboBox10.FormattingEnabled = true;
             this.comboBox10.Location = new System.Drawing.Point(32, 35);
             this.comboBox10.Name = "comboBox10";
@@ -210,8 +243,11 @@
             // 
             // comboBox9
             // 
+            this.comboBox9.BackColor = System.Drawing.Color.White;
+            this.comboBox9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox9.Enabled = false;
             this.comboBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox9.ForeColor = System.Drawing.Color.Black;
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Location = new System.Drawing.Point(32, 75);
             this.comboBox9.Name = "comboBox9";
@@ -220,8 +256,11 @@
             // 
             // comboBox8
             // 
+            this.comboBox8.BackColor = System.Drawing.Color.White;
+            this.comboBox8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox8.Enabled = false;
             this.comboBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox8.ForeColor = System.Drawing.Color.Black;
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Location = new System.Drawing.Point(32, 120);
             this.comboBox8.Name = "comboBox8";
@@ -230,8 +269,11 @@
             // 
             // comboBox7
             // 
+            this.comboBox7.BackColor = System.Drawing.Color.White;
+            this.comboBox7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox7.Enabled = false;
             this.comboBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox7.ForeColor = System.Drawing.Color.Black;
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(32, 34);
             this.comboBox7.Name = "comboBox7";
@@ -240,8 +282,11 @@
             // 
             // comboBox6
             // 
+            this.comboBox6.BackColor = System.Drawing.Color.White;
+            this.comboBox6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox6.Enabled = false;
             this.comboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox6.ForeColor = System.Drawing.Color.Black;
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Location = new System.Drawing.Point(32, 75);
             this.comboBox6.Name = "comboBox6";
@@ -250,8 +295,11 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.BackColor = System.Drawing.Color.White;
+            this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox2.Enabled = false;
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox2.ForeColor = System.Drawing.Color.Black;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(427, 74);
             this.comboBox2.Name = "comboBox2";
@@ -272,8 +320,11 @@
             // 
             // comboBox3
             // 
+            this.comboBox3.BackColor = System.Drawing.Color.White;
+            this.comboBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox3.Enabled = false;
             this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox3.ForeColor = System.Drawing.Color.Black;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(32, 120);
             this.comboBox3.Name = "comboBox3";
@@ -282,8 +333,11 @@
             // 
             // comboBox4
             // 
+            this.comboBox4.BackColor = System.Drawing.Color.White;
+            this.comboBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox4.Enabled = false;
             this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox4.ForeColor = System.Drawing.Color.Black;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(32, 75);
             this.comboBox4.Name = "comboBox4";
@@ -292,8 +346,11 @@
             // 
             // comboBox5
             // 
+            this.comboBox5.BackColor = System.Drawing.Color.White;
+            this.comboBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox5.Enabled = false;
             this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox5.ForeColor = System.Drawing.Color.Black;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(32, 34);
             this.comboBox5.Name = "comboBox5";
@@ -314,8 +371,11 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox1.Enabled = false;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboBox1.ForeColor = System.Drawing.Color.Black;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(32, 120);
             this.comboBox1.Name = "comboBox1";
@@ -365,60 +425,73 @@
             // 
             // buttonSetDefault
             // 
+            this.buttonSetDefault.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(71)))), ((int)(((byte)(46)))));
+            this.buttonSetDefault.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSetDefault.Enabled = false;
-            this.buttonSetDefault.Location = new System.Drawing.Point(371, 474);
+            this.buttonSetDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSetDefault.ForeColor = System.Drawing.Color.White;
+            this.buttonSetDefault.Location = new System.Drawing.Point(1034, 164);
             this.buttonSetDefault.Name = "buttonSetDefault";
-            this.buttonSetDefault.Size = new System.Drawing.Size(149, 23);
+            this.buttonSetDefault.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.buttonSetDefault.Size = new System.Drawing.Size(161, 33);
             this.buttonSetDefault.TabIndex = 29;
             this.buttonSetDefault.Text = "Set as default";
-            this.buttonSetDefault.UseVisualStyleBackColor = true;
+            this.buttonSetDefault.UseVisualStyleBackColor = false;
             this.buttonSetDefault.Click += new System.EventHandler(this.buttonSetDefault_Click);
             // 
             // buttonGetSettings
             // 
+            this.buttonGetSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(71)))), ((int)(((byte)(46)))));
+            this.buttonGetSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGetSettings.Enabled = false;
-            this.buttonGetSettings.Location = new System.Drawing.Point(32, 474);
+            this.buttonGetSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonGetSettings.ForeColor = System.Drawing.Color.White;
+            this.buttonGetSettings.Location = new System.Drawing.Point(1034, 58);
             this.buttonGetSettings.Name = "buttonGetSettings";
-            this.buttonGetSettings.Size = new System.Drawing.Size(149, 23);
+            this.buttonGetSettings.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.buttonGetSettings.Size = new System.Drawing.Size(161, 33);
             this.buttonGetSettings.TabIndex = 30;
             this.buttonGetSettings.Text = "Get settings from device";
-            this.buttonGetSettings.UseVisualStyleBackColor = true;
+            this.buttonGetSettings.UseVisualStyleBackColor = false;
             this.buttonGetSettings.Click += new System.EventHandler(this.buttonGetSettings_Click);
             // 
             // buttonSave
             // 
+            this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(71)))), ((int)(((byte)(46)))));
+            this.buttonSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(201, 474);
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSave.ForeColor = System.Drawing.Color.White;
+            this.buttonSave.Location = new System.Drawing.Point(1034, 108);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(149, 23);
+            this.buttonSave.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.buttonSave.Size = new System.Drawing.Size(161, 33);
             this.buttonSave.TabIndex = 31;
             this.buttonSave.Text = "Save settings to device";
-            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(32, 432);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(933, 20);
-            this.textBox1.TabIndex = 32;
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(542, 474);
+            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(71)))), ((int)(((byte)(46)))));
+            this.buttonExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonExit.ForeColor = System.Drawing.Color.White;
+            this.buttonExit.Location = new System.Drawing.Point(1034, 222);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(149, 23);
+            this.buttonExit.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.buttonExit.Size = new System.Drawing.Size(161, 33);
             this.buttonExit.TabIndex = 33;
             this.buttonExit.Text = "Exit";
-            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Location = new System.Drawing.Point(619, 262);
+            this.groupBox1.Location = new System.Drawing.Point(619, 253);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 154);
+            this.groupBox1.Size = new System.Drawing.Size(360, 163);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Device test";
@@ -426,20 +499,20 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox2.Location = new System.Drawing.Point(16, 21);
+            this.textBox2.Location = new System.Drawing.Point(15, 30);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(330, 119);
+            this.textBox2.Size = new System.Drawing.Size(330, 120);
             this.textBox2.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 584);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(142)))), ((int)(((byte)(94)))));
+            this.ClientSize = new System.Drawing.Size(1220, 477);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonExit);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonGetSettings);
             this.Controls.Add(this.buttonSetDefault);
@@ -449,8 +522,11 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "r-WASD Desktoip GUI";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -498,7 +574,6 @@
         private System.Windows.Forms.Button buttonSetDefault;
         private System.Windows.Forms.Button buttonGetSettings;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox2;

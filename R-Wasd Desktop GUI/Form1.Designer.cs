@@ -61,12 +61,16 @@
             this.buttonGetSettings = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -362,9 +366,9 @@
             // buttonSetDefault
             // 
             this.buttonSetDefault.Enabled = false;
-            this.buttonSetDefault.Location = new System.Drawing.Point(844, 474);
+            this.buttonSetDefault.Location = new System.Drawing.Point(371, 474);
             this.buttonSetDefault.Name = "buttonSetDefault";
-            this.buttonSetDefault.Size = new System.Drawing.Size(121, 23);
+            this.buttonSetDefault.Size = new System.Drawing.Size(149, 23);
             this.buttonSetDefault.TabIndex = 29;
             this.buttonSetDefault.Text = "Set as default";
             this.buttonSetDefault.UseVisualStyleBackColor = true;
@@ -375,20 +379,20 @@
             this.buttonGetSettings.Enabled = false;
             this.buttonGetSettings.Location = new System.Drawing.Point(32, 474);
             this.buttonGetSettings.Name = "buttonGetSettings";
-            this.buttonGetSettings.Size = new System.Drawing.Size(177, 23);
+            this.buttonGetSettings.Size = new System.Drawing.Size(149, 23);
             this.buttonGetSettings.TabIndex = 30;
-            this.buttonGetSettings.Text = "Get settings from EEPROM";
+            this.buttonGetSettings.Text = "Get settings from device";
             this.buttonGetSettings.UseVisualStyleBackColor = true;
             this.buttonGetSettings.Click += new System.EventHandler(this.buttonGetSettings_Click);
             // 
             // buttonSave
             // 
             this.buttonSave.Enabled = false;
-            this.buttonSave.Location = new System.Drawing.Point(238, 474);
+            this.buttonSave.Location = new System.Drawing.Point(201, 474);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(154, 23);
+            this.buttonSave.Size = new System.Drawing.Size(149, 23);
             this.buttonSave.TabIndex = 31;
-            this.buttonSave.Text = "Save settings to EEPROM";
+            this.buttonSave.Text = "Save settings to device";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -399,11 +403,42 @@
             this.textBox1.Size = new System.Drawing.Size(933, 20);
             this.textBox1.TabIndex = 32;
             // 
+            // buttonExit
+            // 
+            this.buttonExit.Location = new System.Drawing.Point(542, 474);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(149, 23);
+            this.buttonExit.TabIndex = 33;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Location = new System.Drawing.Point(619, 262);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(360, 154);
+            this.groupBox1.TabIndex = 34;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Device test";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox2.Location = new System.Drawing.Point(16, 21);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(330, 119);
+            this.textBox2.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 584);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonGetSettings);
@@ -424,6 +459,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -462,6 +499,9 @@
         private System.Windows.Forms.Button buttonGetSettings;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

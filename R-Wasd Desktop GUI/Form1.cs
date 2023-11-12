@@ -5,8 +5,11 @@ using System.Drawing.Text;
 using System.IO.Ports;
 using System.Linq;
 using System.Management;
+using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.ComboBox;
 
 namespace R_Wasd_Desktop_GUI
 {
@@ -16,7 +19,7 @@ namespace R_Wasd_Desktop_GUI
 
         public delegate void d1(string inData);
 
-        private System.Windows.Forms.ComboBox[] comboBoxes;
+        private ComboBox[] comboBoxes;
 
         readonly Dictionary<string, string> usbKeyCodes = new Dictionary<string, string>()
         {
@@ -49,12 +52,13 @@ namespace R_Wasd_Desktop_GUI
         };
 
         Thread threadArduinoDetect, threadWatchArduinoPort;
-
-        bool hasUnsavedData = false;
-
         ComboBox highLightedComboBox = null;
+        bool hasUnsavedData = false;
+        bool allowedOperation = true;
+        int m_comboBoxPrevIndex = -1;
 
-        List<PrivateFontCollection> _fontCollections;
+        //Create your private font collection object.
+        //PrivateFontCollection privateFontCollection = new PrivateFontCollection();
 
         public Form1()
         {
@@ -89,6 +93,7 @@ namespace R_Wasd_Desktop_GUI
             setButtonsEnadbled(true, false, false, false);
             setComboBoxesEnabled(true, false);
 
+            SetInProgress(true);
             while (arduinoDeviceID == null)
             {
                 try
@@ -111,7 +116,7 @@ namespace R_Wasd_Desktop_GUI
 
                             this.Invoke((MethodInvoker)delegate
                             {
-                                buttonGetSettings.PerformClick();
+                                GetSettingsFromDevice();
                             });
 
                             break;
@@ -135,8 +140,6 @@ namespace R_Wasd_Desktop_GUI
 
             foreach (var comboBox in comboBoxes)
             {
-                comboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
-                comboBox.KeyPress += new KeyPressEventHandler(ComboBox_KeyPress);
                 ListAllCharacters(comboBox);
             }
         }
@@ -153,16 +156,6 @@ namespace R_Wasd_Desktop_GUI
 
             comboBox.DisplayMember = "Key";
             comboBox.ValueMember = "Value";
-        }
-
-        private void ComboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void setComboBoxesEnabled(bool invokeRequired, bool isEnabled)
@@ -203,36 +196,26 @@ namespace R_Wasd_Desktop_GUI
                 if (index != -1)
                 {
                     currentComboBox.SelectedIndex = index;
-                    ComboBox_SelectedIndexChanged(currentComboBox, EventArgs.Empty);
                 }
             }
         }
 
         private void buttonGetSettings_Click(object sender, EventArgs e)
         {
-            bool allowedOperation = true;
+            string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to get settings from device?";
 
-            if (hasUnsavedData)
-            {
-                // Confirm ablak meghívása
-                DialogResult dialogResult = getConfirmDialog();
-                if (dialogResult == DialogResult.No)
-                {
-                    allowedOperation = false;
-                }
-            }
+            DialogResult dialogResult = getConfirmDialog(message, "Get settings");
+            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
 
             if (allowedOperation)
             {
-                setToolText("Download data from device...");
-                setButtonsEnadbled(false, false, false, false);
-                setComboBoxesEnabled(false, false);
-                serialPort1.WriteLine("#TAKE");
+                GetSettingsFromDevice();
             }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            SetInProgress(true);
             setToolText("Upload data to device...");
             setButtonsEnadbled(false, false, false, false);
             setComboBoxesEnabled(false, false);
@@ -250,20 +233,14 @@ namespace R_Wasd_Desktop_GUI
 
         private void buttonSetDefault_Click(object sender, EventArgs e)
         {
-            bool allowedOperation = true;
+            string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to set default settings?";
 
-            if (hasUnsavedData)
-            {
-                // Confirm ablak meghívása
-                DialogResult dialogResult = getConfirmDialog();
-                if (dialogResult == DialogResult.No)
-                {
-                    allowedOperation = false;
-                }
-            }
+            DialogResult dialogResult = getConfirmDialog(message, "Set as default");
+            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
 
             if (allowedOperation)
             {
+                SetInProgress(true);
                 setToolText("Upload data to device...");
                 setButtonsEnadbled(false, false, false, false);
                 setComboBoxesEnabled(false, false);
@@ -273,22 +250,7 @@ namespace R_Wasd_Desktop_GUI
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            bool allowedOperation = true;
-
-            if (hasUnsavedData)
-            {
-                // Confirm ablak meghívása
-                DialogResult dialogResult = getConfirmDialog();
-                if (dialogResult == DialogResult.No)
-                {
-                    allowedOperation = false;
-                }
-            }
-
-            if (allowedOperation)
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -296,6 +258,75 @@ namespace R_Wasd_Desktop_GUI
             string inData = serialPort1.ReadLine();
             d1 writeIt = new d1(processSerialPortDate);
             Invoke(writeIt, inData);
+        }
+
+        private void comboBox_Enter(object sender, EventArgs e)
+        {
+            ComboBox currentComboBox = (ComboBox)sender;
+            m_comboBoxPrevIndex = currentComboBox.SelectedIndex;
+        }
+
+        private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox currentComboBox = (ComboBox)sender;
+            setButtonsEnadbled(false, true, true, true);
+            hasUnsavedData = true;
+            highLightedComboBox = null;
+
+            foreach (ComboBox comboBox in comboBoxes)
+            {
+                if (comboBox.Equals(currentComboBox)) {
+                    continue;
+                }
+
+                if (currentComboBox.SelectedIndex == comboBox.SelectedIndex) {
+                    highLightedComboBox = comboBox;
+                    currentComboBox.SelectedIndex = m_comboBoxPrevIndex;
+                    break;
+                }
+            }
+
+            if (highLightedComboBox != null) {
+                Thread thread = new Thread(HighlightComboBox);
+                thread.Start();
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to exit program?";
+
+            DialogResult dialogResult = getConfirmDialog(message, "Exit");
+            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
+
+            if (!allowedOperation)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                if (threadWatchArduinoPort != null && threadWatchArduinoPort.IsAlive)
+                {
+                    threadWatchArduinoPort.Abort();
+                }
+
+                if (serialPort1 != null && serialPort1.IsOpen)
+                {
+                    serialPort1.Close();
+                    serialPort1.Dispose();
+                }
+
+                Environment.Exit(0);
+            }
+        }
+
+        private void GetSettingsFromDevice()
+        {
+            SetInProgress(true);
+            setToolText("Download data from device...");
+            setButtonsEnadbled(false, false, false, false);
+            setComboBoxesEnabled(false, false);
+            serialPort1.WriteLine("#TAKE");
         }
 
         private void processSerialPortDate(string inData)
@@ -327,10 +358,11 @@ namespace R_Wasd_Desktop_GUI
             {
                 setButtonsEnadbled(false, true, true, true);
                 setComboBoxesEnabled(false, true);
-                buttonGetSettings.PerformClick();
+                GetSettingsFromDevice();
             }
 
             hasUnsavedData = false;
+            SetInProgress(false);
         }
 
         private void setToolText(String toolText)
@@ -338,43 +370,14 @@ namespace R_Wasd_Desktop_GUI
             toolStripStatusLabel1.Text = toolText;
         }
 
-        private DialogResult getConfirmDialog(string message = "There are unsaved changes. Are you sure you want to continue?", string title = "Confirm")
+        private DialogResult getConfirmDialog(string message, string title)
         {
             return MessageBox.Show(message, title, MessageBoxButtons.YesNo);
         }
 
-        private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            setButtonsEnadbled(false, true, true, true);
-            hasUnsavedData = true;
-
-            ComboBox currentComboBox = (ComboBox)sender;
-
-            highLightedComboBox = null;
-
-
-            foreach (ComboBox comboBox in comboBoxes)
-            {
-                if (comboBox.Equals(currentComboBox)) {
-                    continue;
-                }
-
-                if (currentComboBox.SelectedIndex == comboBox.SelectedIndex) {
-                    highLightedComboBox = comboBox;
-                    currentComboBox.SelectedItem = null;
-                    break;
-                }
-            }
-
-            if (highLightedComboBox != null) {
-                Thread thread = new Thread(HighlightComboBox);
-                thread.Start();
-            }
-        }
-
         private void HighlightComboBox()
         {
-            ComboBox comboBox = highLightedComboBox;
+            System.Windows.Forms.ComboBox comboBox = highLightedComboBox;
             bool highlight = true;
 
             for (int i = 0; i < 20; i++)
@@ -412,21 +415,17 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void SetInProgress(bool inProgress)
         {
-        }
+            Cursor cursor = inProgress ? Cursors.WaitCursor : Cursors.Default;
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (threadWatchArduinoPort != null && threadWatchArduinoPort.IsAlive)
+            if (this.InvokeRequired)
             {
-                threadWatchArduinoPort.Abort();
+                this.Invoke(new Action(() => this.Cursor = cursor));
             }
-
-            if (serialPort1 != null && serialPort1.IsOpen)
+            else
             {
-                serialPort1.Close();
-                serialPort1.Dispose();
+                this.Cursor = cursor;
             }
         }
     }

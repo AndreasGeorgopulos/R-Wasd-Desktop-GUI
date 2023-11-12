@@ -100,6 +100,7 @@
             this.comboBox20.Size = new System.Drawing.Size(105, 26);
             this.comboBox20.TabIndex = 39;
             this.comboBox20.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox20.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox19
             // 
@@ -114,6 +115,7 @@
             this.comboBox19.Size = new System.Drawing.Size(105, 26);
             this.comboBox19.TabIndex = 38;
             this.comboBox19.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox19.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox18
             // 
@@ -128,6 +130,7 @@
             this.comboBox18.Size = new System.Drawing.Size(105, 26);
             this.comboBox18.TabIndex = 37;
             this.comboBox18.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox18.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox17
             // 
@@ -142,6 +145,7 @@
             this.comboBox17.Size = new System.Drawing.Size(105, 26);
             this.comboBox17.TabIndex = 36;
             this.comboBox17.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox17.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox16
             // 
@@ -156,6 +160,7 @@
             this.comboBox16.Size = new System.Drawing.Size(105, 26);
             this.comboBox16.TabIndex = 35;
             this.comboBox16.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox16.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox15
             // 
@@ -170,6 +175,7 @@
             this.comboBox15.Size = new System.Drawing.Size(105, 26);
             this.comboBox15.TabIndex = 34;
             this.comboBox15.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox15.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox14
             // 
@@ -184,6 +190,7 @@
             this.comboBox14.Size = new System.Drawing.Size(105, 26);
             this.comboBox14.TabIndex = 33;
             this.comboBox14.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox14.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox13
             // 
@@ -198,6 +205,7 @@
             this.comboBox13.Size = new System.Drawing.Size(105, 26);
             this.comboBox13.TabIndex = 32;
             this.comboBox13.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox13.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox12
             // 
@@ -212,6 +220,7 @@
             this.comboBox12.Size = new System.Drawing.Size(105, 26);
             this.comboBox12.TabIndex = 31;
             this.comboBox12.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox12.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox11
             // 
@@ -226,6 +235,7 @@
             this.comboBox11.Size = new System.Drawing.Size(105, 26);
             this.comboBox11.TabIndex = 30;
             this.comboBox11.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox11.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox10
             // 
@@ -240,6 +250,7 @@
             this.comboBox10.Size = new System.Drawing.Size(105, 26);
             this.comboBox10.TabIndex = 29;
             this.comboBox10.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox10.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox9
             // 
@@ -254,6 +265,7 @@
             this.comboBox9.Size = new System.Drawing.Size(105, 26);
             this.comboBox9.TabIndex = 28;
             this.comboBox9.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox9.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox8
             // 
@@ -268,6 +280,7 @@
             this.comboBox8.Size = new System.Drawing.Size(105, 26);
             this.comboBox8.TabIndex = 27;
             this.comboBox8.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox8.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox7
             // 
@@ -282,6 +295,7 @@
             this.comboBox7.Size = new System.Drawing.Size(105, 26);
             this.comboBox7.TabIndex = 26;
             this.comboBox7.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox7.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox6
             // 
@@ -296,6 +310,7 @@
             this.comboBox6.Size = new System.Drawing.Size(105, 26);
             this.comboBox6.TabIndex = 25;
             this.comboBox6.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox6.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox2
             // 
@@ -310,6 +325,7 @@
             this.comboBox2.Size = new System.Drawing.Size(105, 26);
             this.comboBox2.TabIndex = 21;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox2.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox3
             // 
@@ -324,6 +340,7 @@
             this.comboBox3.Size = new System.Drawing.Size(105, 26);
             this.comboBox3.TabIndex = 25;
             this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox3.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox4
             // 
@@ -338,6 +355,7 @@
             this.comboBox4.Size = new System.Drawing.Size(105, 26);
             this.comboBox4.TabIndex = 26;
             this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox4.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox5
             // 
@@ -352,6 +370,7 @@
             this.comboBox5.Size = new System.Drawing.Size(105, 26);
             this.comboBox5.TabIndex = 27;
             this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox5.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox1
             // 
@@ -366,6 +385,7 @@
             this.comboBox1.Size = new System.Drawing.Size(105, 26);
             this.comboBox1.TabIndex = 21;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
+            this.comboBox1.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // buttonSetDefault
             // 
@@ -380,6 +400,7 @@
             this.buttonSetDefault.Size = new System.Drawing.Size(272, 37);
             this.buttonSetDefault.TabIndex = 29;
             this.buttonSetDefault.Text = "Set as default";
+            this.buttonSetDefault.UseCompatibleTextRendering = true;
             this.buttonSetDefault.UseVisualStyleBackColor = false;
             this.buttonSetDefault.Click += new System.EventHandler(this.buttonSetDefault_Click);
             // 
@@ -396,6 +417,7 @@
             this.buttonGetSettings.Size = new System.Drawing.Size(272, 37);
             this.buttonGetSettings.TabIndex = 30;
             this.buttonGetSettings.Text = "Get settings from device";
+            this.buttonGetSettings.UseCompatibleTextRendering = true;
             this.buttonGetSettings.UseVisualStyleBackColor = false;
             this.buttonGetSettings.Click += new System.EventHandler(this.buttonGetSettings_Click);
             // 
@@ -412,6 +434,7 @@
             this.buttonSave.Size = new System.Drawing.Size(272, 37);
             this.buttonSave.TabIndex = 31;
             this.buttonSave.Text = "Save settings to device";
+            this.buttonSave.UseCompatibleTextRendering = true;
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -427,6 +450,7 @@
             this.buttonExit.Size = new System.Drawing.Size(272, 37);
             this.buttonExit.TabIndex = 33;
             this.buttonExit.Text = "Exit";
+            this.buttonExit.UseCompatibleTextRendering = true;
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
@@ -470,8 +494,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "r-WASD Desktoip GUI";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO.Ports;
 using System.Linq;
 using System.Management;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,13 +15,10 @@ using static System.Windows.Forms.ComboBox;
 
 namespace R_Wasd_Desktop_GUI
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        private string arduinoDeviceID;
-
         public delegate void d1(string inData);
-
-        private ComboBox[] comboBoxes;
+        public ComboBox[] comboBoxes;
 
         readonly Dictionary<string, string> usbKeyCodes = new Dictionary<string, string>()
         {
@@ -51,88 +50,24 @@ namespace R_Wasd_Desktop_GUI
             { "0xE9", "Num 9" }, { "0xEA", "Num 0" }, { "0xEB", "Num ." }
         };
 
-        Thread threadArduinoDetect, threadWatchArduinoPort;
+        ArduinoDevice arduinoDevice;
         ComboBox highLightedComboBox = null;
-        bool hasUnsavedData = false;
+        public bool hasUnsavedData = false;
         bool allowedOperation = true;
+        public bool hasFormClosing = false;
         int m_comboBoxPrevIndex = -1;
 
-        //Create your private font collection object.
-        //PrivateFontCollection privateFontCollection = new PrivateFontCollection();
-
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
             InitializeComboBoxData();
 
-            threadWatchArduinoPort = new Thread(WatchArduinoPort);
-            threadWatchArduinoPort.Start();
-        }
-
-        private void WatchArduinoPort()
-        {
-            while (true)
-            {
-                if (!serialPort1.IsOpen && (threadArduinoDetect == null || !threadArduinoDetect.IsAlive))
-                {
-                    arduinoDeviceID = null;
-                    threadArduinoDetect = new Thread(AutodetectArduinoPort);
-                    threadArduinoDetect.Start();
-                }
-            }
-        }
-
-        private void AutodetectArduinoPort()
-        {
-            ManagementScope connectionScope = new ManagementScope();
-            SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_SerialPort");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
-
-            toolStripStatusLabel1.Text = "Waiting for device connect...";
-
-            setButtonsEnadbled(true, false, false, false);
-            setComboBoxesEnabled(true, false);
-
-            SetInProgress(true);
-            while (arduinoDeviceID == null)
-            {
-                try
-                {
-                    foreach (ManagementObject item in searcher.Get())
-                    {
-                        string desc = item["Description"].ToString();
-                        string deviceId = item["DeviceID"].ToString();
-
-                        if (desc.Contains("Arduino"))
-                        {
-                            arduinoDeviceID = deviceId;
-                            toolStripStatusLabel1.Text = $"Device connected on {deviceId}";
-
-                            serialPort1.PortName = arduinoDeviceID;
-                            serialPort1.Open();
-
-                            setButtonsEnadbled(true, true, false, true);
-                            setComboBoxesEnabled(true, true);
-
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                GetSettingsFromDevice();
-                            });
-
-                            break;
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    //toolStripStatusLabel1.Text = $"Error: {e.Message}";
-                }
-            }
+            arduinoDevice = ArduinoDevice.GetInstance(this);
         }
 
         private void InitializeComboBoxData()
         {
-            comboBoxes = new System.Windows.Forms.ComboBox[]
+            comboBoxes = new ComboBox[]
             {
                 comboBox1, comboBox2, comboBox3, comboBox4, comboBox5, comboBox6, comboBox7, comboBox8, comboBox9, comboBox10,
                 comboBox11, comboBox12, comboBox13, comboBox14, comboBox15, comboBox16, comboBox17, comboBox18, comboBox19, comboBox20
@@ -144,7 +79,7 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        private void ListAllCharacters(System.Windows.Forms.ComboBox comboBox)
+        private void ListAllCharacters(ComboBox comboBox)
         {
             Array keyValues = Enum.GetValues(typeof(Keys));
             foreach (var keyValue in usbKeyCodes)
@@ -158,7 +93,7 @@ namespace R_Wasd_Desktop_GUI
             comboBox.ValueMember = "Value";
         }
 
-        private void setComboBoxesEnabled(bool invokeRequired, bool isEnabled)
+        public void setComboBoxesEnabled(bool invokeRequired, bool isEnabled)
         {
             foreach (var comboBox in comboBoxes)
             {
@@ -171,7 +106,7 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        private void setButtonsEnadbled(bool invokeRequired, bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled)
+        public void setButtonsEnadbled(bool invokeRequired, bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled)
         {
             if (invokeRequired)
             {
@@ -187,7 +122,7 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        private void setComboboxByKey(System.Windows.Forms.ComboBox currentComboBox, string key)
+        public void setComboboxByKey(ComboBox currentComboBox, string key)
         {
             if (usbKeyCodes.ContainsKey(key))
             {
@@ -205,30 +140,16 @@ namespace R_Wasd_Desktop_GUI
             string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to get settings from device?";
 
             DialogResult dialogResult = getConfirmDialog(message, "Get settings");
-            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
 
-            if (allowedOperation)
+            if (dialogResult == DialogResult.Yes)
             {
-                GetSettingsFromDevice();
+                arduinoDevice.CommandTake();
             }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            SetInProgress(true);
-            setToolText("Upload data to device...");
-            setButtonsEnadbled(false, false, false, false);
-            setComboBoxesEnabled(false, false);
-
-            string outData = "#SAVE ";
-            foreach (var comboBox in comboBoxes)
-            {
-                KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)comboBox.SelectedItem;
-                outData += $"{selectedPair.Value}|";
-            }
-            outData = outData.Remove(outData.Length - 1);
-
-            serialPort1.WriteLine(outData);
+            arduinoDevice.CommandSave();
         }
 
         private void buttonSetDefault_Click(object sender, EventArgs e)
@@ -236,15 +157,10 @@ namespace R_Wasd_Desktop_GUI
             string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to set default settings?";
 
             DialogResult dialogResult = getConfirmDialog(message, "Set as default");
-            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
 
-            if (allowedOperation)
+            if (dialogResult == DialogResult.Yes)
             {
-                SetInProgress(true);
-                setToolText("Upload data to device...");
-                setButtonsEnadbled(false, false, false, false);
-                setComboBoxesEnabled(false, false);
-                serialPort1.WriteLine("#SET_AS_DEFAULT");
+                arduinoDevice.CommandSetAsDefault();
             }
         }
 
@@ -256,7 +172,7 @@ namespace R_Wasd_Desktop_GUI
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string inData = serialPort1.ReadLine();
-            d1 writeIt = new d1(processSerialPortDate);
+            d1 writeIt = new d1(arduinoDevice.processReceivedData);
             Invoke(writeIt, inData);
         }
 
@@ -294,7 +210,7 @@ namespace R_Wasd_Desktop_GUI
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string message = (hasUnsavedData ? "Your settings are not save. " : "") + "Are you sure to exit program?";
+            string message = (hasUnsavedData ? "Your settings are not saved. " : "") + "Are you sure to exit the program?";
 
             DialogResult dialogResult = getConfirmDialog(message, "Exit");
             allowedOperation = dialogResult == DialogResult.Yes ? true : false;
@@ -305,67 +221,12 @@ namespace R_Wasd_Desktop_GUI
             }
             else
             {
-                if (threadWatchArduinoPort != null && threadWatchArduinoPort.IsAlive)
-                {
-                    threadWatchArduinoPort.Abort();
-                }
-
-                if (serialPort1 != null && serialPort1.IsOpen)
-                {
-                    serialPort1.Close();
-                    serialPort1.Dispose();
-                }
-
-                Environment.Exit(0);
+                hasFormClosing = true;
+                arduinoDevice.AbortThreads();
             }
         }
 
-        private void GetSettingsFromDevice()
-        {
-            SetInProgress(true);
-            setToolText("Download data from device...");
-            setButtonsEnadbled(false, false, false, false);
-            setComboBoxesEnabled(false, false);
-            serialPort1.WriteLine("#TAKE");
-        }
-
-        private void processSerialPortDate(string inData)
-        {
-            if (inData.Contains("#TAKE"))
-            {
-                List<string> list = inData.Substring(inData.IndexOf(" ") + 1).Split('|').ToList();
-                int index = 0;
-
-                foreach (var comboBox in comboBoxes)
-                {
-                    string keyCode = list[index].Trim();
-                    setComboboxByKey(comboBox, keyCode);
-                    index++;
-                }
-
-                setButtonsEnadbled(false, true, false, true);
-                setComboBoxesEnabled(false, true);
-                setToolText("The EEPROM settings has been successfully loaded");
-
-            }
-            else if (inData.Contains("#SAVE"))
-            {
-                setButtonsEnadbled(false, true, false, true);
-                setComboBoxesEnabled(false, true);
-                setToolText("The EEPROM settings has been successfully saved");
-            }
-            else if (inData.Contains("#SET_AS_DEFAULT"))
-            {
-                setButtonsEnadbled(false, true, true, true);
-                setComboBoxesEnabled(false, true);
-                GetSettingsFromDevice();
-            }
-
-            hasUnsavedData = false;
-            SetInProgress(false);
-        }
-
-        private void setToolText(String toolText)
+        public void setToolText(String toolText)
         {
             toolStripStatusLabel1.Text = toolText;
         }
@@ -377,7 +238,7 @@ namespace R_Wasd_Desktop_GUI
 
         private void HighlightComboBox()
         {
-            System.Windows.Forms.ComboBox comboBox = highLightedComboBox;
+            ComboBox comboBox = highLightedComboBox;
             bool highlight = true;
 
             for (int i = 0; i < 20; i++)
@@ -415,7 +276,7 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        private void SetInProgress(bool inProgress)
+        public void SetInProgress(bool inProgress)
         {
             Cursor cursor = inProgress ? Cursors.WaitCursor : Cursors.Default;
 

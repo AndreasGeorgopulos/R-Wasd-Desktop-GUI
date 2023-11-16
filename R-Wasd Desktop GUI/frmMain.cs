@@ -10,6 +10,7 @@ using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ComboBox;
 
@@ -17,6 +18,9 @@ namespace R_Wasd_Desktop_GUI
 {
     public partial class frmMain : Form
     {
+        const string appVersion = "1.0.0";
+        public string firmwareVersion = "";
+
         public delegate void d1(string inData);
         public ComboBox[] comboBoxes;
 
@@ -51,7 +55,6 @@ namespace R_Wasd_Desktop_GUI
         };
 
         ArduinoDevice arduinoDevice;
-        ComboBox highLightedComboBox = null;
         public bool hasUnsavedData = false;
         bool allowedOperation = true;
         public bool hasFormClosing = false;
@@ -60,6 +63,15 @@ namespace R_Wasd_Desktop_GUI
         public frmMain()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+
+            Task.Run(() => {
+                setButtonsEnadbled(false, false, false, false);
+                labelAppVersion.Text = labelAppVersion.Text.Replace("----", appVersion);
+                labelAppVersion.Refresh();
+                labelFirmwareVersion.Refresh();
+            });
+
             InitializeComboBoxData();
 
             arduinoDevice = ArduinoDevice.GetInstance(this);
@@ -75,7 +87,10 @@ namespace R_Wasd_Desktop_GUI
 
             foreach (var comboBox in comboBoxes)
             {
-                ListAllCharacters(comboBox);
+                Task.Run(() => {
+                    ListAllCharacters(comboBox);
+                    comboBox.Refresh();
+                });
             }
         }
 
@@ -87,52 +102,58 @@ namespace R_Wasd_Desktop_GUI
                 string itemText = keyValue.Value;
                 string itemValue = keyValue.Key;
                 comboBox.Items.Add(new KeyValuePair<string, string>(itemText, itemValue));
+                comboBox.Refresh();
             }
 
             comboBox.DisplayMember = "Key";
             comboBox.ValueMember = "Value";
         }
 
-        public void setComboBoxesEnabled(bool invokeRequired, bool isEnabled)
+        public void setComboBoxesEnabled(bool isEnabled)
         {
             foreach (var comboBox in comboBoxes)
             {
-                if (invokeRequired)
-                {
-                    comboBox.Invoke(new Action(() => comboBox.Enabled = isEnabled));
-                    continue;
-                }
-                comboBox.Enabled = isEnabled;
+                Task.Run(() => {
+                    comboBox.Enabled = isEnabled;
+                    comboBox.Refresh();
+                });
             }
         }
 
-        public void setButtonsEnadbled(bool invokeRequired, bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled)
+        public void setButtonsEnadbled(bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled, bool isExitEnabled = true)
         {
-            if (invokeRequired)
-            {
-                buttonGetSettings.Invoke(new Action(() => buttonGetSettings.Enabled = isGetEnabled));
-                buttonSave.Invoke(new Action(() => buttonSave.Enabled = isSaveEnabled));
-                buttonSetDefault.Invoke(new Action(() => buttonSetDefault.Enabled = isdefaultEnabled));
-            }
-            else
-            {
+            Task.Run(() => {
                 buttonGetSettings.Enabled = isGetEnabled;
+                buttonGetSettings.Refresh();
+            });
+
+            Task.Run(() => {
                 buttonSave.Enabled = isSaveEnabled;
+                buttonSave.Refresh();
+            });
+
+            Task.Run(() => {
                 buttonSetDefault.Enabled = isdefaultEnabled;
-            }
+                buttonSetDefault.Refresh();
+            });
+
+            Task.Run(() => {
+                buttonExit.Enabled = isExitEnabled;
+                buttonExit.Refresh();
+            });
         }
 
         public void setComboboxByKey(ComboBox currentComboBox, string key)
         {
-            if (usbKeyCodes.ContainsKey(key))
-            {
+            Task.Run(() => {
                 string value = usbKeyCodes[key];
                 int index = currentComboBox.FindStringExact(value);
                 if (index != -1)
                 {
                     currentComboBox.SelectedIndex = index;
+                    currentComboBox.Refresh();
                 }
-            }
+            });
         }
 
         private void buttonGetSettings_Click(object sender, EventArgs e)
@@ -184,28 +205,34 @@ namespace R_Wasd_Desktop_GUI
 
         private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ComboBox currentComboBox = (ComboBox)sender;
-            setButtonsEnadbled(false, true, true, true);
-            hasUnsavedData = true;
-            highLightedComboBox = null;
+            Task.Run(() => {
+                ComboBox currentComboBox = (ComboBox)sender;
+                ComboBox highLightedComboBox = null;
+                setButtonsEnadbled(true, true, true);
+                hasUnsavedData = true;
 
-            foreach (ComboBox comboBox in comboBoxes)
-            {
-                if (comboBox.Equals(currentComboBox)) {
-                    continue;
+                foreach (ComboBox comboBox in comboBoxes)
+                {
+                    if (comboBox.Equals(currentComboBox))
+                    {
+                        continue;
+                    }
+
+                    if (currentComboBox.SelectedIndex == comboBox.SelectedIndex)
+                    {
+                        highLightedComboBox = comboBox;
+                        currentComboBox.SelectedIndex = m_comboBoxPrevIndex;
+                        break;
+                    }
                 }
 
-                if (currentComboBox.SelectedIndex == comboBox.SelectedIndex) {
-                    highLightedComboBox = comboBox;
-                    currentComboBox.SelectedIndex = m_comboBoxPrevIndex;
-                    break;
-                }
-            }
+                currentComboBox.Refresh();
 
-            if (highLightedComboBox != null) {
-                Thread thread = new Thread(HighlightComboBox);
-                thread.Start();
-            }
+                if (highLightedComboBox != null)
+                {
+                    HighlightComboBox(highLightedComboBox);
+                }
+            });
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -228,7 +255,18 @@ namespace R_Wasd_Desktop_GUI
 
         public void setToolText(String toolText)
         {
-            toolStripStatusLabel1.Text = toolText;
+            Task.Run(() => {
+                toolStripStatusLabel1.Text = toolText;
+                statusStrip1.Refresh();
+            });
+        }
+
+        public void SetInProgress(bool inProgress)
+        {
+            Task.Run(() => {
+                Cursor cursor = inProgress ? Cursors.WaitCursor : Cursors.Default;
+                this.Cursor = cursor;
+            });
         }
 
         private DialogResult getConfirmDialog(string message, string title)
@@ -236,27 +274,12 @@ namespace R_Wasd_Desktop_GUI
             return MessageBox.Show(message, title, MessageBoxButtons.YesNo);
         }
 
-        private void HighlightComboBox()
+        private void HighlightComboBox(ComboBox comboBox)
         {
-            ComboBox comboBox = highLightedComboBox;
-            bool highlight = true;
+            Task.Run(() => {
+                bool highlight = true;
 
-            for (int i = 0; i < 20; i++)
-            {
-                if (comboBox.InvokeRequired)
-                {
-                    if (highlight)
-                    {
-                        comboBox.Invoke(new Action(() => comboBox.BackColor = Color.OrangeRed));
-                        comboBox.Invoke(new Action(() => comboBox.ForeColor = Color.White));
-                    }
-                    else
-                    {
-                        comboBox.Invoke(new Action(() => comboBox.BackColor = Color.White));
-                        comboBox.Invoke(new Action(() => comboBox.ForeColor = Color.Black));
-                    }
-                }
-                else
+                for (int i = 0; i < 20; i++)
                 {
                     if (highlight)
                     {
@@ -268,26 +291,11 @@ namespace R_Wasd_Desktop_GUI
                         comboBox.BackColor = Color.White;
                         comboBox.ForeColor = Color.Black;
                     }
+                    comboBox.Refresh();
+                    Thread.Sleep(200);
+                    highlight = !highlight;
                 }
-
-                Thread.Sleep(300);
-
-                highlight = !highlight;
-            }
-        }
-
-        public void SetInProgress(bool inProgress)
-        {
-            Cursor cursor = inProgress ? Cursors.WaitCursor : Cursors.Default;
-
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new Action(() => this.Cursor = cursor));
-            }
-            else
-            {
-                this.Cursor = cursor;
-            }
+            });
         }
     }
 }

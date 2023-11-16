@@ -33,12 +33,5 @@ namespace R_Wasd_Desktop_GUI
                 MessageBox.Show("This program already running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        /*static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-        }*/
     }
 }

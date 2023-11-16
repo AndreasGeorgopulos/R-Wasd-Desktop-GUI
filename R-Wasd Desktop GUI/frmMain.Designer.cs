@@ -57,6 +57,8 @@
             this.buttonGetSettings = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.labelFirmwareVersion = new System.Windows.Forms.Label();
+            this.labelAppVersion = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +91,7 @@
             // 
             // comboBox20
             // 
+            this.comboBox20.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox20.BackColor = System.Drawing.Color.White;
             this.comboBox20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox20.Enabled = false;
@@ -98,12 +101,13 @@
             this.comboBox20.Location = new System.Drawing.Point(1434, 692);
             this.comboBox20.Name = "comboBox20";
             this.comboBox20.Size = new System.Drawing.Size(105, 26);
-            this.comboBox20.TabIndex = 39;
+            this.comboBox20.TabIndex = 23;
             this.comboBox20.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox20.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox19
             // 
+            this.comboBox19.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox19.BackColor = System.Drawing.Color.White;
             this.comboBox19.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox19.Enabled = false;
@@ -113,12 +117,13 @@
             this.comboBox19.Location = new System.Drawing.Point(1340, 741);
             this.comboBox19.Name = "comboBox19";
             this.comboBox19.Size = new System.Drawing.Size(105, 26);
-            this.comboBox19.TabIndex = 38;
+            this.comboBox19.TabIndex = 24;
             this.comboBox19.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox19.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox18
             // 
+            this.comboBox18.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox18.BackColor = System.Drawing.Color.White;
             this.comboBox18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox18.Enabled = false;
@@ -128,12 +133,13 @@
             this.comboBox18.Location = new System.Drawing.Point(1244, 692);
             this.comboBox18.Name = "comboBox18";
             this.comboBox18.Size = new System.Drawing.Size(105, 26);
-            this.comboBox18.TabIndex = 37;
+            this.comboBox18.TabIndex = 22;
             this.comboBox18.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox18.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox17
             // 
+            this.comboBox17.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox17.BackColor = System.Drawing.Color.White;
             this.comboBox17.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox17.Enabled = false;
@@ -143,12 +149,13 @@
             this.comboBox17.Location = new System.Drawing.Point(1341, 643);
             this.comboBox17.Name = "comboBox17";
             this.comboBox17.Size = new System.Drawing.Size(105, 26);
-            this.comboBox17.TabIndex = 36;
+            this.comboBox17.TabIndex = 21;
             this.comboBox17.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox17.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox16
             // 
+            this.comboBox16.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox16.BackColor = System.Drawing.Color.White;
             this.comboBox16.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox16.Enabled = false;
@@ -158,12 +165,13 @@
             this.comboBox16.Location = new System.Drawing.Point(1328, 354);
             this.comboBox16.Name = "comboBox16";
             this.comboBox16.Size = new System.Drawing.Size(105, 26);
-            this.comboBox16.TabIndex = 35;
+            this.comboBox16.TabIndex = 18;
             this.comboBox16.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox16.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox15
             // 
+            this.comboBox15.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox15.BackColor = System.Drawing.Color.White;
             this.comboBox15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox15.Enabled = false;
@@ -173,12 +181,13 @@
             this.comboBox15.Location = new System.Drawing.Point(1122, 692);
             this.comboBox15.Name = "comboBox15";
             this.comboBox15.Size = new System.Drawing.Size(105, 26);
-            this.comboBox15.TabIndex = 34;
+            this.comboBox15.TabIndex = 19;
             this.comboBox15.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox15.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox14
             // 
+            this.comboBox14.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox14.BackColor = System.Drawing.Color.White;
             this.comboBox14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox14.Enabled = false;
@@ -188,12 +197,13 @@
             this.comboBox14.Location = new System.Drawing.Point(1328, 146);
             this.comboBox14.Name = "comboBox14";
             this.comboBox14.Size = new System.Drawing.Size(105, 26);
-            this.comboBox14.TabIndex = 33;
+            this.comboBox14.TabIndex = 15;
             this.comboBox14.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox14.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox13
             // 
+            this.comboBox13.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox13.BackColor = System.Drawing.Color.White;
             this.comboBox13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox13.Enabled = false;
@@ -203,12 +213,13 @@
             this.comboBox13.Location = new System.Drawing.Point(1327, 245);
             this.comboBox13.Name = "comboBox13";
             this.comboBox13.Size = new System.Drawing.Size(105, 26);
-            this.comboBox13.TabIndex = 32;
+            this.comboBox13.TabIndex = 17;
             this.comboBox13.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox13.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox12
             // 
+            this.comboBox12.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox12.BackColor = System.Drawing.Color.White;
             this.comboBox12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox12.Enabled = false;
@@ -218,12 +229,13 @@
             this.comboBox12.Location = new System.Drawing.Point(1190, 91);
             this.comboBox12.Name = "comboBox12";
             this.comboBox12.Size = new System.Drawing.Size(105, 26);
-            this.comboBox12.TabIndex = 31;
+            this.comboBox12.TabIndex = 16;
             this.comboBox12.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox12.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox11
             // 
+            this.comboBox11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox11.BackColor = System.Drawing.Color.White;
             this.comboBox11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox11.Enabled = false;
@@ -233,12 +245,13 @@
             this.comboBox11.Location = new System.Drawing.Point(1329, 457);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(105, 26);
-            this.comboBox11.TabIndex = 30;
+            this.comboBox11.TabIndex = 14;
             this.comboBox11.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox11.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox10
             // 
+            this.comboBox10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox10.BackColor = System.Drawing.Color.White;
             this.comboBox10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox10.Enabled = false;
@@ -248,12 +261,13 @@
             this.comboBox10.Location = new System.Drawing.Point(943, 91);
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(105, 26);
-            this.comboBox10.TabIndex = 29;
+            this.comboBox10.TabIndex = 13;
             this.comboBox10.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox10.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox9
             // 
+            this.comboBox9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox9.BackColor = System.Drawing.Color.White;
             this.comboBox9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox9.Enabled = false;
@@ -263,12 +277,13 @@
             this.comboBox9.Location = new System.Drawing.Point(1067, 91);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(105, 26);
-            this.comboBox9.TabIndex = 28;
+            this.comboBox9.TabIndex = 12;
             this.comboBox9.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox9.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox8
             // 
+            this.comboBox8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox8.BackColor = System.Drawing.Color.White;
             this.comboBox8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox8.Enabled = false;
@@ -278,12 +293,13 @@
             this.comboBox8.Location = new System.Drawing.Point(820, 91);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(105, 26);
-            this.comboBox8.TabIndex = 27;
+            this.comboBox8.TabIndex = 11;
             this.comboBox8.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox8.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox7
             // 
+            this.comboBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox7.BackColor = System.Drawing.Color.White;
             this.comboBox7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox7.Enabled = false;
@@ -293,12 +309,13 @@
             this.comboBox7.Location = new System.Drawing.Point(650, 140);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(105, 26);
-            this.comboBox7.TabIndex = 26;
+            this.comboBox7.TabIndex = 10;
             this.comboBox7.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox7.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox6
             // 
+            this.comboBox6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox6.BackColor = System.Drawing.Color.White;
             this.comboBox6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox6.Enabled = false;
@@ -308,12 +325,13 @@
             this.comboBox6.Location = new System.Drawing.Point(650, 222);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(105, 26);
-            this.comboBox6.TabIndex = 25;
+            this.comboBox6.TabIndex = 9;
             this.comboBox6.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox6.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox2
             // 
+            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox2.BackColor = System.Drawing.Color.White;
             this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox2.Enabled = false;
@@ -323,12 +341,13 @@
             this.comboBox2.Location = new System.Drawing.Point(1327, 542);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(105, 26);
-            this.comboBox2.TabIndex = 21;
+            this.comboBox2.TabIndex = 20;
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox2.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox3
             // 
+            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox3.BackColor = System.Drawing.Color.White;
             this.comboBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox3.Enabled = false;
@@ -338,12 +357,13 @@
             this.comboBox3.Location = new System.Drawing.Point(650, 561);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(105, 26);
-            this.comboBox3.TabIndex = 25;
+            this.comboBox3.TabIndex = 5;
             this.comboBox3.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox3.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox4
             // 
+            this.comboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox4.BackColor = System.Drawing.Color.White;
             this.comboBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox4.Enabled = false;
@@ -353,12 +373,13 @@
             this.comboBox4.Location = new System.Drawing.Point(650, 461);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(105, 26);
-            this.comboBox4.TabIndex = 26;
+            this.comboBox4.TabIndex = 6;
             this.comboBox4.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox4.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox5
             // 
+            this.comboBox5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox5.BackColor = System.Drawing.Color.White;
             this.comboBox5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox5.Enabled = false;
@@ -368,12 +389,13 @@
             this.comboBox5.Location = new System.Drawing.Point(650, 379);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(105, 26);
-            this.comboBox5.TabIndex = 27;
+            this.comboBox5.TabIndex = 7;
             this.comboBox5.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox5.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
             // comboBox1
             // 
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox1.BackColor = System.Drawing.Color.White;
             this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox1.Enabled = false;
@@ -383,7 +405,7 @@
             this.comboBox1.Location = new System.Drawing.Point(650, 297);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(105, 26);
-            this.comboBox1.TabIndex = 21;
+            this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox_SelectionChangeCommitted);
             this.comboBox1.Enter += new System.EventHandler(this.comboBox_Enter);
             // 
@@ -398,7 +420,7 @@
             this.buttonSetDefault.Name = "buttonSetDefault";
             this.buttonSetDefault.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.buttonSetDefault.Size = new System.Drawing.Size(272, 37);
-            this.buttonSetDefault.TabIndex = 29;
+            this.buttonSetDefault.TabIndex = 3;
             this.buttonSetDefault.Text = "Set as default";
             this.buttonSetDefault.UseCompatibleTextRendering = true;
             this.buttonSetDefault.UseVisualStyleBackColor = false;
@@ -415,7 +437,7 @@
             this.buttonGetSettings.Name = "buttonGetSettings";
             this.buttonGetSettings.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.buttonGetSettings.Size = new System.Drawing.Size(272, 37);
-            this.buttonGetSettings.TabIndex = 30;
+            this.buttonGetSettings.TabIndex = 1;
             this.buttonGetSettings.Text = "Get settings from device";
             this.buttonGetSettings.UseCompatibleTextRendering = true;
             this.buttonGetSettings.UseVisualStyleBackColor = false;
@@ -432,7 +454,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.buttonSave.Size = new System.Drawing.Size(272, 37);
-            this.buttonSave.TabIndex = 31;
+            this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Save settings to device";
             this.buttonSave.UseCompatibleTextRendering = true;
             this.buttonSave.UseVisualStyleBackColor = false;
@@ -448,11 +470,36 @@
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.buttonExit.Size = new System.Drawing.Size(272, 37);
-            this.buttonExit.TabIndex = 33;
+            this.buttonExit.TabIndex = 4;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseCompatibleTextRendering = true;
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // labelFirmwareVersion
+            // 
+            this.labelFirmwareVersion.AutoSize = true;
+            this.labelFirmwareVersion.BackColor = System.Drawing.Color.Transparent;
+            this.labelFirmwareVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelFirmwareVersion.ForeColor = System.Drawing.Color.Black;
+            this.labelFirmwareVersion.Location = new System.Drawing.Point(1388, 809);
+            this.labelFirmwareVersion.Name = "labelFirmwareVersion";
+            this.labelFirmwareVersion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelFirmwareVersion.Size = new System.Drawing.Size(172, 16);
+            this.labelFirmwareVersion.TabIndex = 40;
+            this.labelFirmwareVersion.Text = "Device firmware version: ----";
+            // 
+            // labelAppVersion
+            // 
+            this.labelAppVersion.AutoSize = true;
+            this.labelAppVersion.BackColor = System.Drawing.Color.Transparent;
+            this.labelAppVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelAppVersion.ForeColor = System.Drawing.Color.Black;
+            this.labelAppVersion.Location = new System.Drawing.Point(1187, 809);
+            this.labelAppVersion.Name = "labelAppVersion";
+            this.labelAppVersion.Size = new System.Drawing.Size(143, 16);
+            this.labelAppVersion.TabIndex = 41;
+            this.labelAppVersion.Text = "Application version: ----";
             // 
             // frmMain
             // 
@@ -460,6 +507,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1580, 857);
+            this.Controls.Add(this.labelAppVersion);
+            this.Controls.Add(this.labelFirmwareVersion);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox20);
             this.Controls.Add(this.comboBox18);
@@ -530,6 +579,8 @@
         private System.Windows.Forms.Button buttonGetSettings;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonExit;
+        public System.Windows.Forms.Label labelFirmwareVersion;
+        private System.Windows.Forms.Label labelAppVersion;
     }
 }
 

@@ -43,79 +43,97 @@ namespace R_Wasd_Desktop_GUI
 
         public void CommandTake()
         {
-            form.SetInProgress(true);
-            form.setToolText("Download data from device...");
-            form.setButtonsEnadbled(false, false, false, false);
-            form.setComboBoxesEnabled(false, false);
-            form.serialPort1.WriteLine(COMMAND_TAKE);
+            Task.Run(() => {
+                form.SetInProgress(true);
+                form.setToolText("Download data from device...");
+                form.setButtonsEnadbled(false, false, false, false);
+                form.setComboBoxesEnabled(false);
+                form.serialPort1.WriteLine(COMMAND_TAKE);
+            });
         }
 
         public void CommandSetAsDefault()
         {
-            form.SetInProgress(true);
-            form.setToolText("Upload data to device...");
-            form.setButtonsEnadbled(false, false, false, false);
-            form.setComboBoxesEnabled(false, false);
-            form.serialPort1.WriteLine(COMMAND_SET_AS_DEFAULT);
+            Task.Run(() => {
+                form.SetInProgress(true);
+                form.setToolText("Upload data to device...");
+                form.setButtonsEnadbled(false, false, false, false);
+                form.setComboBoxesEnabled(false);
+                form.serialPort1.WriteLine(COMMAND_SET_AS_DEFAULT);
+            });
         }
 
         public void CommandSave()
         {
-            form.SetInProgress(true);
-            form.setToolText("Upload data to device...");
-            form.setButtonsEnadbled(false, false, false, false);
-            form.setComboBoxesEnabled(false, false);
+            Task.Run(() => {
+                form.SetInProgress(true);
+                form.setToolText("Upload data to device...");
+                form.setButtonsEnadbled(false, false, false, false);
+                form.setComboBoxesEnabled(false);
 
-            string outData = COMMAND_SAVE + " ";
-            foreach (var comboBox in form.comboBoxes)
-            {
-                KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)comboBox.SelectedItem;
-                outData += $"{selectedPair.Value}|";
-            }
-            outData = outData.Remove(outData.Length - 1);
+                string outData = COMMAND_SAVE + " ";
+                foreach (var comboBox in form.comboBoxes)
+                {
+                    KeyValuePair<string, string> selectedPair = (KeyValuePair<string, string>)comboBox.SelectedItem;
+                    outData += $"{selectedPair.Value}|";
+                }
+                outData = outData.Remove(outData.Length - 1);
 
-            form.serialPort1.WriteLine(outData);
+                form.serialPort1.WriteLine(outData);
+            });
         }
 
         public void CommandGetFirmwareVersion()
         {
-            form.serialPort1.WriteLine(COMMAND_GET_FIRMWARE_VERSION);
+            Task.Run(() => {
+                form.serialPort1.WriteLine(COMMAND_GET_FIRMWARE_VERSION);
+            });
         }
 
         public void processReceivedData(string inData)
         {
-            if (inData.Contains(COMMAND_TAKE))
-            {
-                List<string> list = inData.Substring(inData.IndexOf(" ") + 1).Split('|').ToList();
-                int index = 0;
-
-                foreach (var comboBox in form.comboBoxes)
+            Task.Run(() => {
+                if (inData.Contains(COMMAND_TAKE))
                 {
-                    string keyCode = list[index].Trim();
-                    form.setComboboxByKey(comboBox, keyCode);
-                    index++;
+                    List<string> list = inData.Substring(inData.IndexOf(" ") + 1).Split('|').ToList();
+                    int index = 0;
+
+                    foreach (var comboBox in form.comboBoxes)
+                    {
+                        string keyCode = list[index].Trim();
+                        form.setComboboxByKey(comboBox, keyCode);
+                        index++;
+                    }
+
+                    form.setButtonsEnadbled(true, false, true);
+                    form.setComboBoxesEnabled(true);
+                    form.setToolText("The EEPROM settings has been successfully loaded");
+
+                    CommandGetFirmwareVersion();
+
+                }
+                else if (inData.Contains(COMMAND_SAVE))
+                {
+                    form.setButtonsEnadbled(true, false, true);
+                    form.setComboBoxesEnabled(true);
+                    form.setToolText("The EEPROM settings has been successfully saved");
+                }
+                else if (inData.Contains(COMMAND_SET_AS_DEFAULT))
+                {
+                    form.setButtonsEnadbled(true, true, true);
+                    form.setComboBoxesEnabled(true);
+                    CommandTake();
+                }
+                else if (inData.Contains(COMMAND_GET_FIRMWARE_VERSION))
+                {
+                    form.firmwareVersion = inData.Substring(inData.IndexOf(" ") + 1);
+                    form.labelFirmwareVersion.Text = form.labelFirmwareVersion.Text.Replace("----", form.firmwareVersion);
+
                 }
 
-                form.setButtonsEnadbled(false, true, false, true);
-                form.setComboBoxesEnabled(false, true);
-                form.setToolText("The EEPROM settings has been successfully loaded");
-
-            }
-            else if (inData.Contains(COMMAND_SAVE))
-            {
-                form.setButtonsEnadbled(false, true, false, true);
-                form.setComboBoxesEnabled(false, true);
-                form.setToolText("The EEPROM settings has been successfully saved");
-            }
-            else if (inData.Contains(COMMAND_SET_AS_DEFAULT))
-            {
-                form.setButtonsEnadbled(false, true, true, true);
-                form.setComboBoxesEnabled(false, true);
-                CommandTake();
-            }
-
-            form.hasUnsavedData = false;
-            form.SetInProgress(false);
+                form.hasUnsavedData = false;
+                form.SetInProgress(false);
+            });
         }
 
         private void WatchArduinoPort()
@@ -137,10 +155,10 @@ namespace R_Wasd_Desktop_GUI
             SelectQuery serialQuery = new SelectQuery("SELECT * FROM Win32_SerialPort");
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(connectionScope, serialQuery);
 
-            form.toolStripStatusLabel1.Text = "Waiting for device connect...";
+            form.setToolText("Waiting for device connect...");
 
-            form.setButtonsEnadbled(true, false, false, false);
-            form.setComboBoxesEnabled(true, false);
+            form.setButtonsEnadbled(false, false, false);
+            form.setComboBoxesEnabled(false);
 
             form.SetInProgress(true);
             while (arduinoDeviceID == null)
@@ -155,18 +173,15 @@ namespace R_Wasd_Desktop_GUI
                         if (desc.Contains("Arduino"))
                         {
                             arduinoDeviceID = deviceId;
-                            form.toolStripStatusLabel1.Text = $"Device connected on {deviceId}";
+                            form.setToolText($"Device connected on {deviceId}");
 
                             form.serialPort1.PortName = arduinoDeviceID;
                             form.serialPort1.Open();
 
-                            form.setButtonsEnadbled(true, true, false, true);
-                            form.setComboBoxesEnabled(true, true);
-
-                            this.form.Invoke((MethodInvoker)delegate
-                            {
-                                CommandTake();
-                            });
+                            form.setButtonsEnadbled(true, false, true);
+                            form.setComboBoxesEnabled(true);
+                            
+                            CommandTake();
 
                             break;
                         }
@@ -174,7 +189,7 @@ namespace R_Wasd_Desktop_GUI
                 }
                 catch (Exception e)
                 {
-                    //toolStripStatusLabel1.Text = $"Error: {e.Message}";
+                    form.setToolText($"Error: {e.Message}");
                 }
             }
         }

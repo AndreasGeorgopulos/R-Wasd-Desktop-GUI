@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R-Wasd Desktop GUI", "R-Wasd Desktop GUI\R-Wasd Desktop GUI.csproj", "{C65838E0-FF2A-40CB-B17D-30EFCA41CCE8}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{BF8C4160-C82B-441D-AF97-E8F1610CAD17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C65838E0-FF2A-40CB-B17D-30EFCA41CCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C65838E0-FF2A-40CB-B17D-30EFCA41CCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C65838E0-FF2A-40CB-B17D-30EFCA41CCE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8C4160-C82B-441D-AF97-E8F1610CAD17}.Debug|Any CPU.ActiveCfg = Debug
+		{BF8C4160-C82B-441D-AF97-E8F1610CAD17}.Debug|Any CPU.Build.0 = Debug
+		{BF8C4160-C82B-441D-AF97-E8F1610CAD17}.Release|Any CPU.ActiveCfg = Release
+		{BF8C4160-C82B-441D-AF97-E8F1610CAD17}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

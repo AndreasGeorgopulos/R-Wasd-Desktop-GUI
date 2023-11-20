@@ -59,7 +59,18 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelFirmwareVersion = new System.Windows.Forms.Label();
             this.labelAppVersion = new System.Windows.Forms.Label();
+            this.buttonCheckUpdate = new System.Windows.Forms.Button();
+            this.groupBoxFirmwareUpdate = new System.Windows.Forms.GroupBox();
+            this.labelFirmwareDescription = new System.Windows.Forms.Label();
+            this.labelFirmwareNewVersion = new System.Windows.Forms.Label();
+            this.labelFirmwareTitle = new System.Windows.Forms.Label();
+            this.buttonFirmwareCancel = new System.Windows.Forms.Button();
+            this.buttonFirmwareUpdate = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
+            this.groupBoxFirmwareUpdate.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -501,12 +512,133 @@
             this.labelAppVersion.TabIndex = 41;
             this.labelAppVersion.Text = "Application version: ----";
             // 
+            // buttonCheckUpdate
+            // 
+            this.buttonCheckUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(71)))), ((int)(((byte)(46)))));
+            this.buttonCheckUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCheckUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonCheckUpdate.ForeColor = System.Drawing.Color.White;
+            this.buttonCheckUpdate.Location = new System.Drawing.Point(181, 489);
+            this.buttonCheckUpdate.Name = "buttonCheckUpdate";
+            this.buttonCheckUpdate.Size = new System.Drawing.Size(272, 37);
+            this.buttonCheckUpdate.TabIndex = 42;
+            this.buttonCheckUpdate.Text = "Check for firmware update";
+            this.buttonCheckUpdate.UseVisualStyleBackColor = false;
+            this.buttonCheckUpdate.Click += new System.EventHandler(this.buttonCheckUpdate_ClickAsync);
+            // 
+            // groupBoxFirmwareUpdate
+            // 
+            this.groupBoxFirmwareUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(149)))), ((int)(((byte)(172)))));
+            this.groupBoxFirmwareUpdate.Controls.Add(this.labelFirmwareDescription);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.labelFirmwareNewVersion);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.labelFirmwareTitle);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.buttonFirmwareCancel);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.buttonFirmwareUpdate);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.label3);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.label2);
+            this.groupBoxFirmwareUpdate.Controls.Add(this.label1);
+            this.groupBoxFirmwareUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBoxFirmwareUpdate.ForeColor = System.Drawing.Color.White;
+            this.groupBoxFirmwareUpdate.Location = new System.Drawing.Point(183, 546);
+            this.groupBoxFirmwareUpdate.Name = "groupBoxFirmwareUpdate";
+            this.groupBoxFirmwareUpdate.Size = new System.Drawing.Size(267, 266);
+            this.groupBoxFirmwareUpdate.TabIndex = 43;
+            this.groupBoxFirmwareUpdate.TabStop = false;
+            this.groupBoxFirmwareUpdate.Text = "Available new firmware update";
+            this.groupBoxFirmwareUpdate.Visible = false;
+            // 
+            // labelFirmwareDescription
+            // 
+            this.labelFirmwareDescription.AutoSize = true;
+            this.labelFirmwareDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelFirmwareDescription.Location = new System.Drawing.Point(16, 135);
+            this.labelFirmwareDescription.Name = "labelFirmwareDescription";
+            this.labelFirmwareDescription.Size = new System.Drawing.Size(160, 16);
+            this.labelFirmwareDescription.TabIndex = 7;
+            this.labelFirmwareDescription.Text = "labelFirmwareDescription";
+            // 
+            // labelFirmwareNewVersion
+            // 
+            this.labelFirmwareNewVersion.AutoSize = true;
+            this.labelFirmwareNewVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelFirmwareNewVersion.Location = new System.Drawing.Point(15, 92);
+            this.labelFirmwareNewVersion.Name = "labelFirmwareNewVersion";
+            this.labelFirmwareNewVersion.Size = new System.Drawing.Size(165, 16);
+            this.labelFirmwareNewVersion.TabIndex = 6;
+            this.labelFirmwareNewVersion.Text = "labelFirmwareNewVersion";
+            // 
+            // labelFirmwareTitle
+            // 
+            this.labelFirmwareTitle.AutoSize = true;
+            this.labelFirmwareTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelFirmwareTitle.Location = new System.Drawing.Point(16, 51);
+            this.labelFirmwareTitle.Name = "labelFirmwareTitle";
+            this.labelFirmwareTitle.Size = new System.Drawing.Size(118, 16);
+            this.labelFirmwareTitle.TabIndex = 5;
+            this.labelFirmwareTitle.Text = "labelFirmwareTitle";
+            // 
+            // buttonFirmwareCancel
+            // 
+            this.buttonFirmwareCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(142)))), ((int)(((byte)(94)))));
+            this.buttonFirmwareCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonFirmwareCancel.Location = new System.Drawing.Point(137, 217);
+            this.buttonFirmwareCancel.Name = "buttonFirmwareCancel";
+            this.buttonFirmwareCancel.Size = new System.Drawing.Size(92, 33);
+            this.buttonFirmwareCancel.TabIndex = 4;
+            this.buttonFirmwareCancel.Text = "Cancel";
+            this.buttonFirmwareCancel.UseVisualStyleBackColor = false;
+            this.buttonFirmwareCancel.Click += new System.EventHandler(this.buttonFirmwareCancel_Click);
+            // 
+            // buttonFirmwareUpdate
+            // 
+            this.buttonFirmwareUpdate.BackColor = System.Drawing.Color.Red;
+            this.buttonFirmwareUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonFirmwareUpdate.Location = new System.Drawing.Point(41, 217);
+            this.buttonFirmwareUpdate.Name = "buttonFirmwareUpdate";
+            this.buttonFirmwareUpdate.Size = new System.Drawing.Size(90, 33);
+            this.buttonFirmwareUpdate.TabIndex = 3;
+            this.buttonFirmwareUpdate.Text = "Update";
+            this.buttonFirmwareUpdate.UseVisualStyleBackColor = false;
+            this.buttonFirmwareUpdate.Click += new System.EventHandler(this.buttonFirmwareUpdate_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(14, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Version:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(16, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Description:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(14, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Title:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1580, 857);
+            this.Controls.Add(this.groupBoxFirmwareUpdate);
+            this.Controls.Add(this.buttonCheckUpdate);
             this.Controls.Add(this.labelAppVersion);
             this.Controls.Add(this.labelFirmwareVersion);
             this.Controls.Add(this.comboBox4);
@@ -544,8 +676,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "r-WASD Desktoip GUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBoxFirmwareUpdate.ResumeLayout(false);
+            this.groupBoxFirmwareUpdate.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -581,6 +716,16 @@
         private System.Windows.Forms.Button buttonExit;
         public System.Windows.Forms.Label labelFirmwareVersion;
         private System.Windows.Forms.Label labelAppVersion;
+        private System.Windows.Forms.Button buttonCheckUpdate;
+        private System.Windows.Forms.GroupBox groupBoxFirmwareUpdate;
+        private System.Windows.Forms.Label labelFirmwareTitle;
+        private System.Windows.Forms.Button buttonFirmwareCancel;
+        private System.Windows.Forms.Button buttonFirmwareUpdate;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelFirmwareNewVersion;
+        private System.Windows.Forms.Label labelFirmwareDescription;
     }
 }
 

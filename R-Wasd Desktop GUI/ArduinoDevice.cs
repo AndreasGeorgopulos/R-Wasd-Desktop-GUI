@@ -12,6 +12,8 @@ namespace R_Wasd_Desktop_GUI
 {
     internal class ArduinoDevice
     {
+        const string VID = "VID_2341";
+        const string PID = "PID_8036";
         const string COMMAND_TAKE = "#TAKE";
         const string COMMAND_SAVE = "#SAVE";
         const string COMMAND_SET_AS_DEFAULT = "#SET_AS_DEFAULT";
@@ -46,7 +48,7 @@ namespace R_Wasd_Desktop_GUI
             Task.Run(() => {
                 form.SetInProgress(true);
                 form.setToolText("Download data from device...");
-                form.setButtonsEnadbled(false, false, false, false);
+                form.setButtonsEnadbled(false, false, false, false, false);
                 form.setComboBoxesEnabled(false);
                 form.serialPort1.WriteLine(COMMAND_TAKE);
             });
@@ -57,7 +59,7 @@ namespace R_Wasd_Desktop_GUI
             Task.Run(() => {
                 form.SetInProgress(true);
                 form.setToolText("Upload data to device...");
-                form.setButtonsEnadbled(false, false, false, false);
+                form.setButtonsEnadbled(false, false, false, false, false);
                 form.setComboBoxesEnabled(false);
                 form.serialPort1.WriteLine(COMMAND_SET_AS_DEFAULT);
             });
@@ -68,7 +70,7 @@ namespace R_Wasd_Desktop_GUI
             Task.Run(() => {
                 form.SetInProgress(true);
                 form.setToolText("Upload data to device...");
-                form.setButtonsEnadbled(false, false, false, false);
+                form.setButtonsEnadbled(false, false, false, false, false);
                 form.setComboBoxesEnabled(false);
 
                 string outData = COMMAND_SAVE + " ";
@@ -105,7 +107,7 @@ namespace R_Wasd_Desktop_GUI
                         index++;
                     }
 
-                    form.setButtonsEnadbled(true, false, true);
+                    form.setButtonsEnadbled(true, false, true, true, true);
                     form.setComboBoxesEnabled(true);
                     form.setToolText("The EEPROM settings has been successfully loaded");
 
@@ -114,20 +116,20 @@ namespace R_Wasd_Desktop_GUI
                 }
                 else if (inData.Contains(COMMAND_SAVE))
                 {
-                    form.setButtonsEnadbled(true, false, true);
+                    form.setButtonsEnadbled(true, false, true, true, true);
                     form.setComboBoxesEnabled(true);
                     form.setToolText("The EEPROM settings has been successfully saved");
                 }
                 else if (inData.Contains(COMMAND_SET_AS_DEFAULT))
                 {
-                    form.setButtonsEnadbled(true, true, true);
+                    form.setButtonsEnadbled(true, true, true, true, true);
                     form.setComboBoxesEnabled(true);
                     CommandTake();
                 }
                 else if (inData.Contains(COMMAND_GET_FIRMWARE_VERSION))
                 {
                     form.firmwareVersion = inData.Substring(inData.IndexOf(" ") + 1);
-                    form.labelFirmwareVersion.Text = form.labelFirmwareVersion.Text.Replace("----", form.firmwareVersion);
+                    form.labelFirmwareVersion.Text = $"Device firmware version: {form.firmwareVersion}";
 
                 }
 
@@ -140,12 +142,14 @@ namespace R_Wasd_Desktop_GUI
         {
             while (true)
             {
-                if (!form.serialPort1.IsOpen && (threadArduinoDetect == null || !threadArduinoDetect.IsAlive) && !form.hasFormClosing)
+                if (!form.serialPort1.IsOpen && (threadArduinoDetect == null || !threadArduinoDetect.IsAlive) && !form.hasFormClosing && !form.hasFirmwareUpdate)
                 {
                     arduinoDeviceID = null;
                     threadArduinoDetect = new Thread(AutodetectArduinoPort);
                     threadArduinoDetect.Start();
                 }
+
+                Thread.Sleep(1000);
             }
         }
 
@@ -157,7 +161,7 @@ namespace R_Wasd_Desktop_GUI
 
             form.setToolText("Waiting for device connect...");
 
-            form.setButtonsEnadbled(false, false, false);
+            form.setButtonsEnadbled(false, false, false, true, false);
             form.setComboBoxesEnabled(false);
 
             form.SetInProgress(true);
@@ -168,9 +172,10 @@ namespace R_Wasd_Desktop_GUI
                     foreach (ManagementObject item in searcher.Get())
                     {
                         string desc = item["Description"].ToString();
+                        string pnpDeviceId = item["PNPDeviceID"].ToString();
                         string deviceId = item["DeviceID"].ToString();
 
-                        if (desc.Contains("Arduino"))
+                        if (pnpDeviceId.Contains(VID) && pnpDeviceId.Contains(PID))
                         {
                             arduinoDeviceID = deviceId;
                             form.setToolText($"Device connected on {deviceId}");
@@ -178,14 +183,18 @@ namespace R_Wasd_Desktop_GUI
                             form.serialPort1.PortName = arduinoDeviceID;
                             form.serialPort1.Open();
 
-                            form.setButtonsEnadbled(true, false, true);
+                            form.setButtonsEnadbled(true, false, true, true, true);
                             form.setComboBoxesEnabled(true);
                             
                             CommandTake();
 
                             break;
                         }
+
+                        Thread.Sleep(1000);
                     }
+
+                    Thread.Sleep(1000);
                 }
                 catch (Exception e)
                 {

@@ -12,14 +12,18 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static R_Wasd_Desktop_GUI.Updates;
 using static System.Windows.Forms.ComboBox;
 
 namespace R_Wasd_Desktop_GUI
 {
     public partial class frmMain : Form
     {
-        const string appVersion = "1.0.0";
+        public readonly string addCode = "RWASDDIGITAL16";
+        public readonly string appVersion = "1.0";
+
         public string firmwareVersion = "";
+        
 
         public delegate void d1(string inData);
         public ComboBox[] comboBoxes;
@@ -56,9 +60,10 @@ namespace R_Wasd_Desktop_GUI
 
         ArduinoDevice arduinoDevice;
         public bool hasUnsavedData = false;
-        bool allowedOperation = true;
+        public bool hasFirmwareUpdate = false;
         public bool hasFormClosing = false;
         int m_comboBoxPrevIndex = -1;
+        FirmwareInfo firmwareInfo;
 
         public frmMain()
         {
@@ -66,7 +71,7 @@ namespace R_Wasd_Desktop_GUI
             CheckForIllegalCrossThreadCalls = false;
 
             Task.Run(() => {
-                setButtonsEnadbled(false, false, false, false);
+                setButtonsEnadbled(false, false, false, false, false);
                 labelAppVersion.Text = labelAppVersion.Text.Replace("----", appVersion);
                 labelAppVersion.Refresh();
                 labelFirmwareVersion.Refresh();
@@ -120,7 +125,7 @@ namespace R_Wasd_Desktop_GUI
             }
         }
 
-        public void setButtonsEnadbled(bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled, bool isExitEnabled = true)
+        public void setButtonsEnadbled(bool isGetEnabled, bool isSaveEnabled, bool isdefaultEnabled, bool isExitEnabled = true, bool isCheckUpdateEnabled = true)
         {
             Task.Run(() => {
                 buttonGetSettings.Enabled = isGetEnabled;
@@ -140,6 +145,11 @@ namespace R_Wasd_Desktop_GUI
             Task.Run(() => {
                 buttonExit.Enabled = isExitEnabled;
                 buttonExit.Refresh();
+            });
+
+            Task.Run(() => {
+                buttonCheckUpdate.Enabled = isCheckUpdateEnabled;
+                buttonCheckUpdate.Refresh();
             });
         }
 
@@ -208,7 +218,7 @@ namespace R_Wasd_Desktop_GUI
             Task.Run(() => {
                 ComboBox currentComboBox = (ComboBox)sender;
                 ComboBox highLightedComboBox = null;
-                setButtonsEnadbled(true, true, true);
+                setButtonsEnadbled(true, true, true, true, true);
                 hasUnsavedData = true;
 
                 foreach (ComboBox comboBox in comboBoxes)
@@ -240,9 +250,8 @@ namespace R_Wasd_Desktop_GUI
             string message = (hasUnsavedData ? "Your settings are not saved. " : "") + "Are you sure to exit the program?";
 
             DialogResult dialogResult = getConfirmDialog(message, "Exit");
-            allowedOperation = dialogResult == DialogResult.Yes ? true : false;
 
-            if (!allowedOperation)
+            if (dialogResult != DialogResult.Yes)
             {
                 e.Cancel = true;
             }
@@ -296,6 +305,77 @@ namespace R_Wasd_Desktop_GUI
                     highlight = !highlight;
                 }
             });
+        }
+
+        private async void buttonCheckUpdate_ClickAsync(object sender, EventArgs e)
+        {
+            setToolText("Check new available firmware update...");
+
+            Updates updates = Updates.GetInstance(addCode, firmwareVersion);
+            firmwareInfo = await updates.CheckAvailableFirmwareUpdate();
+
+            if (firmwareInfo != null)
+            {
+                setToolText("There is a new available firmware update.");
+
+                labelFirmwareTitle.Text = firmwareInfo.title;
+                labelFirmwareTitle.Refresh();
+
+                labelFirmwareNewVersion.Text = firmwareInfo.version;
+                labelFirmwareNewVersion.Refresh();
+
+                labelFirmwareDescription.Text = firmwareInfo.description;
+                labelFirmwareDescription.Refresh();
+
+                groupBoxFirmwareUpdate.Show();
+                setToolText("");
+            }
+            else
+            {
+                setToolText("There is'nt new available firmware update.");
+            }
+        }
+
+        private async void buttonFirmwareUpdate_Click(object sender, EventArgs e)
+        {
+            Updates updates = Updates.GetInstance(addCode, firmwareVersion);
+            string filePath = await updates.DownloadFirmwareUpdate(firmwareInfo.url);
+
+            if (filePath != null) 
+            {
+                setToolText("Uploading firmware update...");
+
+                SetInProgress(true);
+                setButtonsEnadbled(false, false, false, false, false);
+                setComboBoxesEnabled(true);
+                
+                hasFirmwareUpdate = true;
+                serialPort1.Close();
+                
+                await updates.UploadFirmwareToDevice(filePath, serialPort1.PortName);
+                hasFirmwareUpdate = false;
+
+                setToolText("");
+                setButtonsEnadbled(true, false, true, true, true);
+                setComboBoxesEnabled(true);
+                SetInProgress(false);
+            }
+            else
+            {
+                setToolText("");
+            }
+            groupBoxFirmwareUpdate.Hide();
+
+        }
+
+        private void buttonFirmwareCancel_Click(object sender, EventArgs e)
+        {
+            groupBoxFirmwareUpdate.Hide();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
